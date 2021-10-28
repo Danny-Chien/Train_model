@@ -49,6 +49,7 @@ if __name__ == "__main__" :
     x_train, y_train, x_test = load_data()
     x_train, x_test = normalize(x_train, x_test)
 
+    
     # sklearn model
 
     # from sklearn.model_selection import train_test_split
@@ -64,7 +65,7 @@ if __name__ == "__main__" :
     
     # MLPClassifier
     from sklearn.neural_network import MLPClassifier
-    model1 = MLPClassifier(hidden_layer_sizes = 15, solver = "adam", shuffle = True, early_stopping = True, batch_size = 50)
+    model1 = MLPClassifier(hidden_layer_sizes = 15, solver = "adam", shuffle = True, early_stopping = True, batch_size = 60)
     model1 = model1.fit(x_train, y_train)
     pred1 = model1.predict(x_train)
     # model1 = MLPClassifier(validation_fraction = 0.1,hidden_layer_sizes = 10, solver = "adam", shuffle = False, early_stopping = True, batch_size = 50)
@@ -84,6 +85,14 @@ if __name__ == "__main__" :
     
     y_test = model1.predict(x_test)
     
+    count = 0
+
+    for num in y_test:
+        if num == 1 :
+            count += 1
+    
+    print(count)
+
     # # # write to csv
     with open('predict.csv', mode = 'w', newline = '') as csvf:
         writer = csv.writer(csvf)
