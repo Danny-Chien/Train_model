@@ -54,8 +54,8 @@ def train(x_train, y_train):
     # w,b is for class of < 50k
     b = 0.0
     w = np.zeros(x_train.shape[1])
-    lr = 0.001
-    epoch = 200
+    lrate = 0.001
+    epoch = 256
     # w_lr,b_lr is for class of > 50k
     b_lr = 0
     w_lr = np.ones(x_train.shape[1])
@@ -112,7 +112,7 @@ def train(x_train, y_train):
             gt_b_sum_2 += gt_b_2 ** 2
             gt_b_sum_avg_2 = gt_b_sum_2 / count
             gt_b_tot_2 = (gt_b_sum_avg_2 + epilson) ** (-0.5)
-
+            lr = lrate * ((count) ** (-0.5))
             # update weight
             w -= lr * gt_w_tot_1 * gt_w_1
             w_lr -= lr * gt_w_tot_2 * gt_w_2
